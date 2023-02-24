@@ -1,52 +1,15 @@
 <template>
-  <div class="aztro">
-    <div class="left-section">
+  <div class="container">
 
-      <div class="title-section">
-
-        <h1 id="aztro-title">{{ msg }}</h1>
-        <p id="aztro-description">
-          Get daily horoscope!
-        </p>
-      </div>
-
-      <br/>
-
-      <div class="select-section">
-
-        <!-- 날짜 선택 -->
-        <select v-model="day" name="day" class="day-selector">
-          <option disabled selected>DAY 📆</option>
-          <option value="Yesterday">YESTERDAY</option>
-          <option value="Today">TODAY</option>
-          <option value="Tomorrow">TOMORROW</option>
-        </select>      
-        
-        <!-- 별자리 선택 -->
-        <span>SIGN : </span>
-        <select v-model="sign" name="sign" class="sign-selector">
-          <option disabled selected>SIGN 🎇</option>
-          <option value="Capricorn">CAPRICORN</option>
-          <option value="Aquarius">AQUARIUS</option>
-          <option value="Pisces">PISCES</option>
-          <option value="Aries">ARIES</option>
-          <option value="Taurus">TAURUS</option>
-          <option value="Gemini">GEMINI</option>
-          <option value="Cancer">CANCER</option>
-          <option value="Leo">LEO</option>
-          <option value="Virgo">VIRGO</option>
-          <option value="Libra">LIBRA</option>
-          <option value="Scorpio">SCORPIO</option>
-          <option value="Sagittarius">SAGITTARIUS</option>
-        </select>
-      </div>
-      <br/>
-      <button @click="getHoroscope">GET HOROSCOPE</button>
-    
+    <div class="item">
+      <h1 id="aztro-title">{{ msg }}</h1>
+      <p id="aztro-description">
+        Get daily horoscope!
+      </p>
     </div>
     
-    <div class="right-section">
-
+    <!-- 결과 섹션 -->
+    <div class="item">
       <h3>{{ requestDay }} horoscope for {{ requestSign }}</h3>
       <ul id="aztro-result">
         <li>Current Date: {{data.current_date}}</li>
@@ -58,7 +21,44 @@
         <li>Mood: {{data.mood}}</li>
         <li>Description: {{data.description}}</li>
       </ul>
+    </div>
 
+    <!-- 날짜 및 별자리 검색 섹션 -->
+    <div class="item">
+      <!-- 날짜 선택 -->
+      <select v-model="day" name="day" class="day-selector">
+        <option disabled selected>DAY 📆</option>
+        <option value="Yesterday">YESTERDAY</option>
+        <option value="Today">TODAY</option>
+        <option value="Tomorrow">TOMORROW</option>
+      </select>      
+        
+      <!-- 별자리 선택 -->
+      <span>SIGN : </span>
+      <select v-model="sign" name="sign" class="sign-selector">
+        <option disabled selected>SIGN 🎇</option>
+        <option value="Capricorn">CAPRICORN</option>
+        <option value="Aquarius">AQUARIUS</option>
+        <option value="Pisces">PISCES</option>
+        <option value="Aries">ARIES</option>
+        <option value="Taurus">TAURUS</option>
+        <option value="Gemini">GEMINI</option>
+        <option value="Cancer">CANCER</option>
+        <option value="Leo">LEO</option>
+        <option value="Virgo">VIRGO</option>
+        <option value="Libra">LIBRA</option>
+        <option value="Scorpio">SCORPIO</option>
+        <option value="Sagittarius">SAGITTARIUS</option>
+      </select>
+      <br/>
+      <button @click="getHoroscope">GET HOROSCOPE</button>
+    
+    </div>
+
+    <!-- footer -->
+    <div class="item">
+      <p>Gmail - <a>jwo2955@gmail.com</a></p>
+      <p>GitHub - <a>https://github.com/jwo29/waldo_aztro-vuejs</a></p>
     </div>
     
   </div>
@@ -71,7 +71,7 @@ const BASE_URL = 'https://aztro.sameerkumar.website/';
 var url = '';
 
 export default {
-  name: 'HelloWorld',
+  name: 'HelloWorldTest',
   props: {
     msg: String
   },
@@ -108,21 +108,23 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.aztro {
-  margin-top: 60px;
+.container {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+  column-gap: 20px;
+
 }
 
-.aztro-main-img {
-  widows: 300px;
-  height: 300px;
-  float: left;
+.item:nth-child(2) {
+  grid-row: 1 / span 2;
+  grid-column: 2;
 }
 
-.title-section {
-  margin: 0 72px 0 16px;
-  width: 300px;
-  height: 300px;
-  float: left;
+.item:nth-child(4) {
+
+  grid-column: 1 /span 2;
+
 }
 
 #aztro-title {
@@ -134,24 +136,6 @@ export default {
 #aztro-description {
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
-}
-
-.select-section {
-  display: inline;
-}
-
-.left-section {
-  float: left;
-  width: 50%;
-  border: medium dashed green;
-  padding: 12px;
-}
-
-.right-section {
-  float: right;
-  width: 40%;
-  border: medium dashed green;
-  padding: 8px;
 }
 
 select {
@@ -181,7 +165,11 @@ ul {
 }
 li {
   margin: 0 10px 8px;
+  padding: 5px 0px 5px 5px;
+  border-bottom: 1px solid #efefef;
+  font-size: 14px;
 }
+
 a {
   color: #42b983;
 }

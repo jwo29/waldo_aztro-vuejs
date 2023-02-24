@@ -1,14 +1,14 @@
 <template>
-  <HelloWorld msg="AZTRO"/>
+  <HelloWorldTest msg="AZTRO"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorldTest from './components/HelloWorldTest.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorldTest
   }
 }
 </script>
